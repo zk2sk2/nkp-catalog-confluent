@@ -1,36 +1,25 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: ${releaseName}-chart-source
+  name: cfk-chart
   namespace: ${releaseNamespace}
 spec:
-  interval: 6h0m0s
+  interval: 6h
+  url: oci://ghcr.io/zk2sk2/helm-cp-cfk/confluent-for-kubernetes
   ref:
-    tag: 0.0.1
-  url: oci://ghcr.io/zk2sk2/nkp-catalog-confluent
+    tag: 0.1514.1
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: nkp-confluent
+  name: confluent-for-kubernetes
   namespace: ${releaseNamespace}
 spec:
+  interval: 15s
   chartRef:
     kind: OCIRepository
-    name: ${releaseName}-chart-source
+    name: cfk-chart
     namespace: ${releaseNamespace}
-  install:
-    crds: CreateReplace
-    createNamespace: true
-    remediation:
-      retries: 30
-  interval: 15s
   targetNamespace: ${releaseNamespace}
-  upgrade:
-    crds: CreateReplace
-    remediation:
-      retries: 30
-  valuesFrom:
-  - kind: ConfigMap
-    name: ${releaseName}-config-defaults
----
+  install:
+    create
