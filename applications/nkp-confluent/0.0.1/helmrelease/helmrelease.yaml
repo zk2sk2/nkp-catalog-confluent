@@ -22,6 +22,7 @@ spec:
     namespace: ${releaseNamespace}
   targetNamespace: ${releaseNamespace}
   install:
+    createNamespace: true 
     crds: CreateReplace
     remediation:
       retries: 30
