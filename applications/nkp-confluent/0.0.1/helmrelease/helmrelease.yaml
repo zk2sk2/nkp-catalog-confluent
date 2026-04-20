@@ -6,8 +6,8 @@ metadata:
 spec:
   interval: 6h0m0s
   ref:
-    tag: 0.1514.1
-  url: oci://ghcr.io/zk2sk2/helm-cp-cfk/confluent-for-kubernetes
+    tag: v1
+  url: oci://ghcr.io/zk2sk2/nkp-catalog-confluent/nkp-catalog-confluent/collection
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
